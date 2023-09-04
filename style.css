@@ -1,0 +1,159 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: lightgray;
+}
+
+.Config{
+    height: 6vh;
+    width: 50%;
+    margin: 5px auto;
+    display: flex;
+    border-radius: 10px;
+    padding: 10px;
+    justify-content: right;
+}
+
+.content{
+    display: flex;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 30px;
+    height: 25px;
+    border-radius: 9999px;
+    background: rgb(160, 37, 156);
+    cursor: pointer;
+}
+  
+.slider::-moz-range-thumb {
+    width: 30px;
+    height: 25px;
+    border-radius: 9999px;
+    background: rgb(160, 37, 156);
+    cursor: pointer;
+}
+
+.slider{
+    margin: auto;
+    -webkit-appearance: none;
+    border-radius: 999px;
+    transition: .4s;
+    opacity: .9;
+    display: flex;
+    margin-left: 10%;
+}
+
+.slider:hover{
+    opacity: 1;
+}
+
+
+.box{
+    margin: 0 20px;
+    height: 100%;
+    aspect-ratio: 1;
+    box-shadow: 3px 11px 17px 4px rgba(0,0,0,0.37);
+    -webkit-box-shadow: 3px 11px 17px 4px rgba(0,0,0,0.37);
+    -moz-box-shadow: 3px 11px 17px 4px rgba(0,0,0,0.37);
+    border-radius: 9999px;
+    transition: .3s;
+    display: flex;
+    cursor: pointer;
+}
+
+#Map{
+    width: 99%;
+    height: 90vh;
+    display: grid;
+    margin: auto;
+    outline: 3px solid limegreen;
+    border-radius: 2px;
+    padding: 2px;
+}
+
+#square{
+    border-radius: 5%;
+    outline: 0.5px solid lightgray;
+    transition: transform 0.1s;
+}
+
+.box div{
+    height: 100%;
+    aspect-ratio: 1;
+    border-radius: 9999px;
+}
+
+.box p{
+    margin: auto;
+    margin: auto;
+    position: relative;
+    left: -75%;
+    transition: .3s linear;
+    z-index: -1;
+}
+
+.box:hover p{
+    left: 0;
+}
+
+.box:hover{
+    aspect-ratio: 2.5;
+}
+
+.erase{
+    background-color: white;
+}
+
+.start{
+    background-color: blue;
+}
+
+.end{
+    background-color: red;
+}
+
+.wall{
+    background-color: black;
+}
+
+.clear{
+    font-size: 50px;
+    color: red;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: white;
+}
+
+.clear span{
+    rotate: 45deg;
+}
+
+.Astar{
+   background-color: greenyellow;
+   font-size: 20px;
+   text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.slider p{
+    margin: auto;
+}
+
+.slider input{
+    box-shadow: 3px 11px 17px 4px rgba(0,0,0,0.24);
+-webkit-box-shadow: 3px 11px 17px 4px rgba(0,0,0,0.24);
+-moz-box-shadow: 3px 11px 17px 4px rgba(0,0,0,0.24);    
+}
+
+.clicked{
+    box-shadow: 0px 0px 17px 12px rgba(17,145,41,0.63);
+    -webkit-box-shadow: 0px 0px 17px 12px rgba(17,145,41,0.63);
+    -moz-box-shadow: 0px 0px 17px 12px rgba(17,145,41,0.63);
+}

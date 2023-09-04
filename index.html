@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>
+        Pathfinding
+    </title>
+</head>
+<body>
+    <div class="content">
+        <div class="slider">
+            <p>
+                SIZE
+            </p>
+            <input type="range" min="1" max="30" defaultValue="20" class="slider" id="sizeslider">
+        </div>
+        <div id="Config" class="Config">
+    
+            <div class="box" onclick="set('Path')" id="path">
+                <div class="erase"></div>
+                <p>
+                    Path
+                </p>
+            </div>
+            
+            <div class="box" onclick="set('Wall')" id="wall">
+                <div class="wall"></div>
+                <p>
+                    Wall
+                </p>
+            </div>
+            <div class="box" onclick="set('Start')" id="start">
+                <div class="start"></div>
+                <p>
+                    Start
+                </p>
+            </div>
+            <div class="box" onclick="set('End')" id="end">
+                <div class="end"></div>
+                <p>
+                    End
+                </p>
+            </div>
+            <div class="box" onclick="set('Clear')" id="clear">
+                <div class="clear">
+                    <span>+</span>
+                </div>
+                <p>
+                    Clear
+                </p>
+            </div>
+            <div class="box" onclick="set('Find')" id="find">
+                <div class="Astar">
+                </div>
+                <p>
+                    Start
+                </p>
+            </div>
+        </div>
+    </div>
+    <div id="Map">
+
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
