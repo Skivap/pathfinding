@@ -3,67 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/2c6ff58c74.js" crossorigin="anonymous"></script>
+    <link href='https://fonts.googleapis.com/css?family=Rock Salt' rel='stylesheet'>
     <link rel="stylesheet" href="style.css">
     <title>
         Pathfinding
     </title>
 </head>
 <body>
-    <div class="content">
-        <div class="slider">
-            <p>
-                SIZE
-            </p>
-            <input type="range" min="1" max="30" defaultValue="20" class="slider" id="sizeslider">
-        </div>
+    <div class="content" id="bar">
         <div id="Config" class="Config">
     
-            <div class="box" onclick="set('Path')" id="path">
-                <div class="erase"></div>
-                <p>
-                    Path
-                </p>
+            <div class="box" onclick="set('Path')">
+                <div class="erase" id="path"></div>
+                <p>PATH</p>
             </div>
             
-            <div class="box" onclick="set('Wall')" id="wall">
-                <div class="wall"></div>
-                <p>
-                    Wall
-                </p>
+            <div class="box" onclick="set('Wall')">
+                <div class="wall" id="wall"></div>
+                <p>WALL</p>
             </div>
-            <div class="box" onclick="set('Start')" id="start">
-                <div class="start"></div>
-                <p>
-                    Start
-                </p>
+            <div class="box" onclick="set('Start')">
+                <div class="start" id="start"></div>
+                <p>START</p>
             </div>
-            <div class="box" onclick="set('End')" id="end">
-                <div class="end"></div>
-                <p>
-                    End
-                </p>
+            <div class="box" onclick="set('End')">
+                <div class="end" id="end"></div>
+                <p>END</p>
             </div>
-            <div class="box" onclick="set('Clear')" id="clear">
-                <div class="clear">
+            <div class="box" onclick="set('Clear')">
+                <div class="clear" id="clear">
                     <span>+</span>
                 </div>
-                <p>
-                    Clear
-                </p>
             </div>
-            <div class="box" onclick="set('Find')" id="find">
-                <div class="Astar">
+            <div class="box" onclick="set('Find')">
+                <div class="astr" id="astr">
+                    <p>
+                        A*
+                    </p>
                 </div>
-                <p>
-                    Start
-                </p>
             </div>
+            <div class="box" onclick="set('Maze')">
+                <div class="maze" id="maze">
+                    <p>
+                        ?
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="drop" onclick="gobar()">
+            <i class="fa-solid fa-chevron-down" id="dropbut"></i>
         </div>
     </div>
     <div id="Map">
 
     </div>
-    
     <script src="script.js"></script>
 </body>
 </html>

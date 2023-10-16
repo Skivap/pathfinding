@@ -1,7 +1,7 @@
-board = document.getElementById("Map")
-boxcursor = 0
-doPath = false;
-forceStop = false;
+let board = document.getElementById("Map")
+let boxcursor = 0
+let doPath = false
+let forceStop = false
 
 let start = null
 let end = null
@@ -9,7 +9,7 @@ let end = null
 var myMap
 // initialize the map
 function init(board_height, board_width){
-    doPath = false;
+    doPath = false
     board.innerHTML = ""
     myMap = new Array(board_height)
 
@@ -67,33 +67,36 @@ class square{
         this.visited = false
         this.prev = null
         this.step = 0
+        this.mark = false
     }
     draw(){
         let opacity = 1
         if(this.datatemp != this.data){
             opacity = 0.5
         }
+        this.box.outline = "none"
         switch(this.datatemp){
             case 0: // unvisited path
                 this.box.style.backgroundColor = "rgba(255, 255 ,255," + opacity + ")"
                 break
             case 1: // visited path
-                this.box.style.backgroundColor = "rgba(0, 255 ,0," + opacity + ")"
+                this.box.style.backgroundColor = "rgba(200, 247, 197," + opacity + ")"
                 break
             case 2: // wall 
-                this.box.style.backgroundColor = "rgba(0, 0 ,0," + opacity + ")"
+                this.box.style.backgroundColor = "rgba(119, 136, 153," + opacity + ")"
                 break
             case 3: // start
-                this.box.style.backgroundColor = "rgba(0, 0 ,255," + opacity + ")"
+                this.box.style.backgroundColor = "rgba(30, 176, 224," + opacity + ")"
                 if(opacity == 1){
                     if(start != null && start != this){
                         start.instantChange(0)
                     }
                     start = this
                 }
+                this.box.outline = "1px solid black"
                 break
             case 4: // end
-                this.box.style.backgroundColor = "rgba(255, 0 ,0," + opacity + ")"
+                this.box.style.backgroundColor = "rgba(255, 76, 48," + opacity + ")"
                 if(opacity == 1){
                     if(end != null && end != this){
                         end.instantChange(0)
@@ -102,7 +105,7 @@ class square{
                 }
                 break
             case 5: // path answer  
-                this.box.style.backgroundColor = "rgba(255, 0 ,255," + opacity + ")"
+                this.box.style.backgroundColor = "rgba(0, 230, 64," + opacity + ")"
                 break
             default:
                 this.box.style.backgroundColor = "white"
@@ -168,14 +171,7 @@ class square{
     }
 }
 
-init(25, 50)
-
-// slider
-size_slider = document.getElementById("sizeslider")
-
-size_slider.oninput = function(){
-    init(5 + 1 * this.value, 10 + (2 * this.value))
-}
+init(35, 69)
 
 // edit painter
 function set(thing){
@@ -183,7 +179,8 @@ function set(thing){
     let wall = document.getElementById("wall")
     let start = document.getElementById("start")
     let end = document.getElementById("end")
-    let find = document.getElementById("find")
+    let find = document.getElementById("astr")
+    
     let cur = null
     switch(thing){
         case "Path":
@@ -207,8 +204,35 @@ function set(thing){
             cur = null
             break
         case "Find":
+            if(end == null || start == null){
+                break
+            }
+            if(bardown == true){
+                gobar()
+            }
+            console.log("SEARCJJ")
             aStar(20)
             cur = find
+            break
+        case "Maze":
+            forceStop = true
+            doPath = false
+            found = false
+            start = null
+            end = null
+            for(let i=0; i<myMap.length; i++){
+                for(let j=0; j<myMap[i].length; j++){
+                    if(j%2 == 1 && i%2 == 1){
+                        myMap[i][j].instantChange(0)
+                        myMap[i][j].mark = false
+                    }
+                    else myMap[i][j].instantChange(2)
+                }
+            }
+            cur = null
+            makemaze(1,1)
+            myMap[1][1].forceChange(3)
+            myMap[33][67].forceChange(4)
             break
         default:
             break
@@ -219,32 +243,36 @@ function set(thing){
         start.classList.remove("clicked")
         end.classList.remove("clicked")
     }
-    
-    if(doPath == false){
-        find.classList.remove("clicked")
-    }
     if(cur != null){
         cur.classList.add("clicked")
     }
+    if(doPath == false){
+        find.classList.remove("clicked")
+    }
+    
 }
 
 
 async function clearMap(){
     console.log("Clear")
     doPath = false;
+    forceStop = true;
     for(let i=0; i<myMap.length; i++){
-        deleteMap(i, 0)
-        await delay(1)
+        for(let j=0; j<myMap[i].length; j++){
+            deleteMap(i, j)
+        }
     }
     start = null
     end = null
 }
 
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
+
 async function deleteMap(x, y){
-    if(y == myMap[x].length) return
+    await delay(getRandomInt(1000))
     myMap[x][y].forceChange(0);
-    await delay(1)
-    deleteMap(x, y + 1)
 }
 
 function setUnvisit(ms){
@@ -372,6 +400,7 @@ function bfs(){
 }
 
 async function aStar(ms){
+    forceStop = false
     if(end == null || start == null) return
     doPath = true;
     let Queue = new priority_queue()
@@ -443,4 +472,63 @@ async function drawPath(block, ms){
         
     }
     return delay(ms)
+}
+
+bar = document.getElementById("bar")
+barbut = document.getElementById("dropbut")
+bardown = false
+
+function gobar(){
+    if(!bardown){
+        bar.style.top = "10px"
+        barbut.style.transform = "scaleY(-1)"
+    }
+    else{
+        bar.style.top = "-85px"
+        barbut.style.transform = "scaleY(1)"
+    }
+    bardown = !bardown
+}
+
+async function makemaze(x, y){
+    let num = [0, 1, 2, 3];
+    let max = 4;
+    myMap[x][y].mark = true
+    while(max){
+        let idx = getRandomInt(max)
+        switch(num[idx]){
+            case 0:
+                if(x + 2 < 35){
+                    if(myMap[x+2][y].mark) break
+                    myMap[x+1][y].instantChange(0)
+                    makemaze(x+2, y)
+                }
+                break
+            case 1:
+                if(x - 2 > 0){
+                    if(myMap[x-2][y].mark) break
+                    myMap[x-1][y].instantChange(0)
+                    makemaze(x-2, y)
+                }
+                break
+            case 2:
+                if(y + 2 < 69){
+                    if(myMap[x][y+2].mark) break
+                    myMap[x][y+1].instantChange(0)
+                    makemaze(x, y+2)
+                }
+                break
+            case 3:
+                if(y - 2 > 0){
+                    if(myMap[x][y-2].mark) break
+                    myMap[x][y-1].instantChange(0)
+                    makemaze(x, y-2)
+                }
+                break
+            default:
+                break
+        }
+        max--;
+        num[idx] = num[max];
+    }
 }

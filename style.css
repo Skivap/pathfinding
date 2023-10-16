@@ -2,12 +2,14 @@ body{
     margin: 0;
     padding: 0;
     background-color: lightgray;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
 }
 
 .Config{
     height: 6vh;
-    width: 50%;
-    margin: 5px auto;
     display: flex;
     border-radius: 10px;
     padding: 10px;
@@ -15,7 +17,34 @@ body{
 }
 
 .content{
+    background-color: rgba(220, 220, 220, 0.6);
     display: flex;
+    position: absolute;
+    top: -85px;
+    margin: auto;
+    border-radius: 999px;
+    transition: .3s;
+    z-index: 1;
+    width: auto;
+}
+
+.drop{
+    width: 100px;
+    height: 40px;
+    background-color: rgba(220, 220, 220, .6);
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 100%;
+    border-radius: 0 0 20px 20px;
+    display: flex;
+    cursor: pointer;
+}
+.drop i{
+    margin: auto;
+    font-size: 40px;
+    transition: .3s;
 }
 
 .slider::-webkit-slider-thumb {
@@ -43,7 +72,6 @@ body{
     transition: .4s;
     opacity: .9;
     display: flex;
-    margin-left: 10%;
 }
 
 .slider:hover{
@@ -55,18 +83,18 @@ body{
     margin: 0 20px;
     height: 100%;
     aspect-ratio: 1;
-    box-shadow: 3px 11px 17px 4px rgba(0,0,0,0.37);
-    -webkit-box-shadow: 3px 11px 17px 4px rgba(0,0,0,0.37);
-    -moz-box-shadow: 3px 11px 17px 4px rgba(0,0,0,0.37);
+    background-color: white;
     border-radius: 9999px;
     transition: .3s;
     display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
 }
 
 #Map{
-    width: 99%;
-    height: 90vh;
+    width: 98.5%;
+    height: 97vh;
     display: grid;
     margin: auto;
     outline: 3px solid limegreen;
@@ -80,66 +108,104 @@ body{
     transition: transform 0.1s;
 }
 
-.box div{
-    height: 100%;
-    aspect-ratio: 1;
-    border-radius: 9999px;
-}
-
 .box p{
     margin: auto;
-    margin: auto;
-    position: relative;
-    left: -75%;
-    transition: .3s linear;
-    z-index: -1;
+    position: absolute;
+    font-family: 'Comic Neue';
+    font-size: 15px;
+    color: black;
+    text-shadow:
+    -1px -1px 0 #ffffff,  
+     1px -1px 0 #ffffff,
+     -1px 1px 0 #ffffff,
+      1px 1px 0 #ffffff;
 }
 
-.box:hover p{
+.box div{
+    aspect-ratio: 1;
+    transition: .3s;
+    margin: auto;
     left: 0;
 }
 
-.box:hover{
-    aspect-ratio: 2.5;
-}
-
 .erase{
+    outline: 2px dashed rgba(0, 0, 0, .6);
     background-color: white;
+    height: 50%;
+    border-radius: 10px;
 }
 
 .start{
-    background-color: blue;
+    outline: 2px dashed rgba(0, 0, 0, .6);
+    background-color: rgb(30, 176, 224);
+    height: 50%;
+    border-radius: 10px;
 }
 
 .end{
-    background-color: red;
+    outline: 2px dashed rgba(0, 0, 0, .6);
+    background-color: rgb(255, 76, 48);
+    height: 50%;
+    border-radius: 10px;
 }
 
 .wall{
-    background-color: black;
+    outline: 2px dashed rgba(0, 0, 0, .6);
+    background-color: rgb(119, 136, 153);
+    height: 50%;
+    border-radius: 10px;
 }
 
 .clear{
-    font-size: 50px;
+    outline: 2px dashed rgba(0, 0, 0, .6);
+    border-radius: 10px;
+    font-size: 30px;
     color: red;
     text-align: center;
     justify-content: center;
     align-items: center;
     display: flex;
     background-color: white;
+    height: 50%;
+    aspect-ratio: 1;
+}
+
+.astr{
+    outline: 2px dashed rgba(0, 0, 0, .6);
+    background-color: rgb(11, 210, 97);
+    height: 50%;
+    border-radius: 10px;
+    text-align: center;
+    justify-content: center;
+    align-items:  center;
+    display: flex;
+}
+
+.maze{
+    outline: 2px dashed rgba(0, 0, 0, .6);
+    background-color: rgb(210, 11, 160);
+    height: 50%;
+    border-radius: 10px;
+    text-align: center;
+    justify-content: center;
+    align-items:  center;
+    display: flex;
 }
 
 .clear span{
     rotate: 45deg;
 }
 
-.Astar{
-   background-color: greenyellow;
-   font-size: 20px;
-   text-align: center;
+.GO{
+    outline: 2px dashed rgba(0, 0, 0, .6);
+    height: 50%;
+    background-color: greenyellow;
+    font-size: 20px;
+    text-align: center;
     justify-content: center;
     align-items: center;
     display: flex;
+    border-radius: 10px;
 }
 
 .slider p{
@@ -148,12 +214,26 @@ body{
 
 .slider input{
     box-shadow: 3px 11px 17px 4px rgba(0,0,0,0.24);
--webkit-box-shadow: 3px 11px 17px 4px rgba(0,0,0,0.24);
--moz-box-shadow: 3px 11px 17px 4px rgba(0,0,0,0.24);    
+    -webkit-box-shadow: 3px 11px 17px 4px rgba(0,0,0,0.24);
+    -moz-box-shadow: 3px 11px 17px 4px rgba(0,0,0,0.24);    
+}
+
+.box:hover .clear{
+    outline: 3px solid green;
+    height: 100%;
+    border-radius: 9999px;
+    font-size: 50px;
+}
+
+.box:hover .maze{
+    outline: 3px solid green;
+    height: 100%;
+    border-radius: 9999px;
+    font-size: 90px;
 }
 
 .clicked{
-    box-shadow: 0px 0px 17px 12px rgba(17,145,41,0.63);
-    -webkit-box-shadow: 0px 0px 17px 12px rgba(17,145,41,0.63);
-    -moz-box-shadow: 0px 0px 17px 12px rgba(17,145,41,0.63);
+    outline: 3px solid rgb(47, 255, 75);
+    height: 80%;
+    border-radius: 9999px;
 }
